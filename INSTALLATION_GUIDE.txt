@@ -1,0 +1,141 @@
+J.A.R.V.I.S. Installation Guide
+==============================
+
+This guide will walk you through installing and setting up the J.A.R.V.I.S. project from scratch on Windows.
+
+---
+
+## 1. Install Python 3.10
+- Download Python 3.10 from the [official Python website](https://www.python.org/downloads/release/python-3100/).
+- During installation, check the box **“Add Python to PATH”**.
+
+---
+
+## 2. Download the Project
+- **Option 1: Git (Recommended)**
+  ```sh
+  git clone https://github.com/BolisettySujith/J.A.R.V.I.S.git
+  ```
+- **Option 2: ZIP**
+  - Download the ZIP from GitHub and extract it.
+
+---
+
+## 3. Navigate to the Project Folder
+```sh
+cd J.A.R.V.I.S
+```
+
+---
+
+## 4. Create a Virtual Environment (Python 3.10)
+```sh
+python -m venv venv
+```
+
+---
+
+## 5. Activate the Virtual Environment
+- **PowerShell:**
+  ```sh
+  .\venv\Scripts\Activate
+  ```
+- **Command Prompt:**
+  ```sh
+  venv\Scripts\activate.bat
+  ```
+
+---
+
+## 6. Upgrade pip, setuptools, and wheel
+```sh
+pip install --upgrade pip setuptools wheel
+```
+
+---
+
+## 7. Install All Requirements
+```sh
+pip install -r requirements.txt
+```
+
+---
+
+## 8. Install PyAudio and portaudio.dll (if needed)
+- If you get errors with PyAudio, do the following:
+  1. Download the correct PyAudio wheel for Python 3.10 from [Gohlke’s archive (Wayback Machine)](https://web.archive.org/web/20240201000000/https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio).
+  2. Download the file named like `PyAudio‑0.2.11‑cp310‑cp310‑win_amd64.whl`.
+  3. Install it:
+     ```sh
+     pip install path\to\PyAudio‑0.2.11‑cp310‑cp310‑win_amd64.whl
+     ```
+  4. If you get a DLL error, download `portaudio.dll` from a trusted source (e.g., [this community mirror](https://github.com/intxcc/portaudio-win-binaries)) and place it in your `venv\Lib\site-packages` directory or alongside your Python executable.
+
+---
+
+## 9. Install ffmpeg (Optional, for audio/video features)
+- Download ffmpeg from [ffmpeg.org](https://ffmpeg.org/download.html).
+- Extract and add the `bin` folder to your system PATH.
+- Test by running `ffmpeg` in a new terminal.
+
+---
+
+## 9a. Install qrcode (if needed)
+If you get an error like `ModuleNotFoundError: No module named 'qrcode'`, install the package (with Pillow for image support):
+
+```sh
+pip install qrcode[pil]
+```
+
+This is required for the QR code generation features in J.A.R.V.I.S.
+
+---
+
+## 10. Provide Required API Keys
+Some features require API keys. You must obtain these and add them to the code:
+
+### a. **News API**
+- **Get your API key:** [https://newsapi.org/](https://newsapi.org/)
+- **Where to put:**
+  - In `JARVIS.py`, find the line:
+    ```python
+    MAIN_URL_= "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=YOUR_API_KEY"
+    ```
+  - Replace `YOUR_API_KEY` with your actual key.
+
+### b. **WolframAlpha API (for knowledge queries, if used)**
+- **Get your API key:** [https://products.wolframalpha.com/api/](https://products.wolframalpha.com/api/)
+- **Where to put:**
+  - In the code, look for lines like:
+    ```python
+    app_id = "YOUR_APP_ID"
+    ```
+  - Replace with your actual App ID.
+
+### c. **Other APIs**
+- If you use any other APIs (e.g., for weather, WhatsApp, etc.), follow the README or code comments for where to insert those keys.
+
+---
+
+## 11. Run the Program
+- For GUI version:
+  ```sh
+  python JarvisUi.py
+  ```
+- For terminal version:
+  ```sh
+  python JarvisWithoutGUI.py
+  ```
+- Or main script:
+  ```sh
+  python JARVIS.py
+  ```
+
+---
+
+## 12. Troubleshooting
+- If you encounter errors, check the `installproblem.txt` file for solutions to common issues.
+
+---
+
+**You are now ready to use J.A.R.V.I.S.!** 

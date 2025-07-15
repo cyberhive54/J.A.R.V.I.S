@@ -1,0 +1,109 @@
+J.A.R.V.I.S. Installation Problems Report
+=========================================
+
+This file documents the problems encountered while installing dependencies for the J.A.R.V.I.S. project, along with their causes and solutions.
+
+1. PyQt5 Installation Fails (qmake not found)
+---------------------------------------------
+**Problem:**
+  - Error: `sipbuild.pyproject.PyProjectOptionException: specify a working qmake or add it to PATH`
+**Cause:**
+  - Attempting to build PyQt5 from source because no pre-built wheel is available for the Python version in use.
+**Solution:**
+  - Use Python 3.10 or lower, as PyQt5 wheels are available for these versions.
+  - Install PyQt5 using: `pip install PyQt5==5.15.9`
+
+2. PyQt5 Version Conflicts
+--------------------------
+**Problem:**
+  - Conflicting requirements between `pyqt5-plugins`, `pyqt5-tools`, and `PyQt5`.
+**Cause:**
+  - Different packages require different versions of PyQt5, which cannot coexist.
+**Solution:**
+  - Align all related packages to the same PyQt5 version (preferably 5.15.9) and update requirements.txt accordingly.
+
+3. pyqt5-plugins Version Not Found
+----------------------------------
+**Problem:**
+  - Error: `Could not find a version that satisfies the requirement pyqt5-plugins==5.15.2.2.0.1`
+**Cause:**
+  - The specified version does not exist on PyPI.
+**Solution:**
+  - Use an available version, e.g., `pyqt5-plugins==5.15.9.2.3`.
+
+4. opencv-python Version Not Found
+----------------------------------
+**Problem:**
+  - Error: `Could not find a version that satisfies the requirement opencv-python==4.5.2.52`
+**Cause:**
+  - The specified version is no longer available on PyPI.
+**Solution:**
+  - Use a newer available version, e.g., `opencv-python==4.5.3.56` or the latest.
+
+5. Microsoft Visual C++ 14.0 Required
+-------------------------------------
+**Problem:**
+  - Error: `error: Microsoft Visual C++ 14.0 is required...`
+**Cause:**
+  - pip tries to build a package from source (e.g., opencv-python, PyAudio, psutil) and the required C++ build tools are missing.
+**Solution:**
+  - Install pre-built wheels whenever possible.
+  - If building from source is necessary, install Visual Studio Build Tools.
+
+6. PyQt5-sip Version Conflict
+-----------------------------
+**Problem:**
+  - Error: `Cannot install PyQt5-sip==12.8.1 and pyqt5==5.15.9 because these package versions have conflicting dependencies.`
+**Cause:**
+  - The required version of PyQt5-sip is too old for the installed PyQt5.
+**Solution:**
+  - Use a compatible version, e.g., `PyQt5-sip==12.17.0`.
+
+7. os-sys and text-editor Not Found
+-----------------------------------
+**Problem:**
+  - Error: `Could not find a version that satisfies the requirement text-editor (from os-sys)`
+**Cause:**
+  - These packages do not exist on PyPI.
+**Solution:**
+  - Remove `os-sys` from requirements.txt.
+
+8. PyAudio Installation Fails (DLL load failed)
+-----------------------------------------------
+**Problem:**
+  - Error: `ImportError: DLL load failed while importing _portaudio: The specified module could not be found.`
+**Cause:**
+  - The required PortAudio DLL is missing or not found by PyAudio.
+**Solution:**
+  - Download the correct PyAudio wheel for your Python version from a trusted source (e.g., Gohlke's archive or Wayback Machine).
+  - If DLL is still missing, manually download `portaudio.dll` and place it in the appropriate directory.
+
+9. pipwin Fails to Install PyAudio
+----------------------------------
+**Problem:**
+  - pipwin fails due to changes in the Gohlke site structure.
+**Solution:**
+  - Use manual wheel download and installation as above.
+
+10. qrcode Module Not Found
+--------------------------
+**Problem:**
+  - Error: `ModuleNotFoundError: No module named 'qrcode'`
+**Cause:**
+  - The package was not installed or was skipped due to earlier install errors.
+**Solution:**
+  - Install with: `pip install qrcode[pil]`
+
+11. No Output or Voice from JARVIS
+----------------------------------
+**Problem:**
+  - Recognized commands do not trigger any output or voice.
+**Cause:**
+  - Command matching logic was too strict, and there was no default handler for unmatched commands.
+**Solution:**
+  - Loosen command matching logic and add a final else clause to always produce output.
+  - Add debug prints and error logging throughout the code.
+
+---
+
+**This report should help you (or others) quickly resolve common installation and setup issues for the J.A.R.V.I.S. project.** 
