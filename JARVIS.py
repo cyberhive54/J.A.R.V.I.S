@@ -272,7 +272,7 @@ class MainThread(QThread):
                 print(f"your IP address is {ip}")
                 self.talk(f"your IP address is {ip}")
             #command for seading a whatsapp group and individual message
-            #Individual => Eg: send a message to sujith
+            #Individual => Eg: send a message to ashish
             #group => Eg: send a message to school group NOTE: mention the name "group" otherwise jarvis cannot detect the name
             elif ('send a message' in self.command):
                 self.whatsapp(self.command)
@@ -834,7 +834,7 @@ class MainThread(QThread):
         print(command)
         if 'github' in command:
             self.talk('opening your github')
-            webbrowser.open('https://github.com/BolisettySujith')
+            webbrowser.open('https://github.com/cyberhive54')
         elif 'gitlab' in command:
             self.talk('opening your gitlab')
             webbrowser.open('https://gitlab.com/-/profile')
@@ -1145,7 +1145,7 @@ class Main(QMainWindow):
         self.ui.movie = QtGui.QMovie(rf"{self.cpath}\UI\ironman3_flipped.gif")
         self.ui.label_16.setMovie(self.ui.movie)
         self.ui.movie.start()
-        self.ui.movie = QtGui.QMovie(rf"{self.cpath}\UI\Sujith.gif")
+        self.ui.movie = QtGui.QMovie(rf"{self.cpath}\UI\ashish.png")
         self.ui.label_17.setMovie(self.ui.movie)
         self.ui.movie.start()
         timer = QTimer(self)
